@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Form Empréstimo</title></head>
+<body>
+<h2>Novo Empréstimo</h2>
+<a th:href="@{/emprestimos}">Voltar</a>
+<form th:action="@{/emprestimos}" th:object="${emprestimo}" method="post">
+  <div>
+    <label>Usuário:</label>
+    <select th:field="*{usuario.id}">
+      <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">Usuário</option>
+    </select>
+  </div>
+  <div>
+    <label>Livro:</label>
+    <select th:field="*{livro.id}">
+      <option th:each="l : ${livros}" th:value="${l.id}" th:text="${l.titulo}">Livro</option>
+    </select>
+  </div>
+  <div>
+    <label>Data Retirada:</label>
+    <input th:field="*{dataRetirada}" type="date"/>
+  </div>
+  <div>
+    <label>Data Prevista Devolução:</label>
+    <input th:field="*{dataPrevistaDevolucao}" type="date"/>
+    <div th:if="${#fields.hasErrors('dataPrevistaDevolucao')}" th:errors="*{dataPrevistaDevolucao}"></div>
+  </div>
+  <div>
+    <button type="submit">Salvar Empréstimo</button>
+  </div>
+</form>
+</body>
+</html>

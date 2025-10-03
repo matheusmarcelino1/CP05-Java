@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Form Usuário</title></head>
+<body>
+<h2 th:text="${usuario.id == null ? 'Novo Usuário' : 'Editar Usuário'}"></h2>
+<a th:href="@{/usuarios}">Voltar</a>
+<form th:action="@{/usuarios}" th:object="${usuario}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  <div>
+    <label>Nome:</label>
+    <input th:field="*{nome}" />
+    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+  </div>
+  <div>
+    <label>E-mail:</label>
+    <input th:field="*{email}" />
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+  </div>
+  <div>
+    <button type="submit">Salvar</button>
+  </div>
+</form>
+</body>
+</html>
